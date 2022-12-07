@@ -12,3 +12,7 @@ dependencyResolutionManagement {
 rootProject.name = "SerialPortKit"
 include ':app'
 include ':serialportk'
+include ':SwiftKit'
+project(':SwiftKit').projectDir = new File("C:\\Users\\mozhimen\\Documents\\GitHub\\SwiftKit")
+include ':SwiftKit:basick'
+
