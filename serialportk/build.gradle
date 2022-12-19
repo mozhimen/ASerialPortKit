@@ -13,16 +13,16 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
 
-        ndkVersion "16.1.4479499"
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++11"
-            }
-        }
-        ndk {
-            abiFilters "armeabi-v7a", "arm64-v8a", "x86"
-            //指定支持的abi版本，也即是编译之后生成的so文件的类型
-        }
+//        ndkVersion "16.1.4479499"
+//        externalNativeBuild {
+//            cmake {
+//                cppFlags "-std=c++11"
+//            }
+//        }
+//        ndk {
+//            abiFilters "armeabi-v7a", "arm64-v8a", "x86"
+//            //指定支持的abi版本，也即是编译之后生成的so文件的类型
+//        }
     }
 
     buildTypes {
@@ -38,12 +38,12 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    externalNativeBuild {
-        cmake {
-            path 'CMakeLists.txt'
-            version "3.18.1"
-        }
-    }
+//    externalNativeBuild {
+//        cmake {
+//            path 'CMakeLists.txt'
+//            version "3.18.1"
+//        }
+//    }
 }
 
 dependencies {
@@ -51,6 +51,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
+    api project(project.path.replace(project.name, '') + ':serialport')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

@@ -1,5 +1,7 @@
 package com.mozhimen.serialportk
 
+import android.serialport.SerialPort
+import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.mozhimen.basick.taskk.temps.TaskKPoll
 import java.io.InputStream
@@ -19,7 +21,7 @@ class SerialPortManager(owner: LifecycleOwner, listener: ISerialPortDataListener
 
     private val _taskKPolling: TaskKPoll by lazy { TaskKPoll(owner) }
 
-    private var _serialPort: SerialPortK? = null// Ads1115 TTL
+    private var _serialPort: SerialPort? = null// Ads1115 TTL
     private var _inputStream: InputStream? = null
     private var _buffer: ByteArray? = null
     private var _bufferSize = 0
@@ -32,9 +34,10 @@ class SerialPortManager(owner: LifecycleOwner, listener: ISerialPortDataListener
 
     override fun init(): Boolean {
         try {
-            _serialPort = SerialPortK
+            _serialPort = SerialPort
                 .newBuilder("/dev/ttyS8", 115200) // 串口地址地址，波特率
                 .build()
+            _inputStream = _serialPort!!.getInputStream()
         } catch (e: Exception) {
             e.printStackTrace()
             _serialPort = null
@@ -46,11 +49,11 @@ class SerialPortManager(owner: LifecycleOwner, listener: ISerialPortDataListener
 
     override fun open() {
         _taskKPolling.start(1000) {
-            _inputStream = _serialPort!!.getInputStream()
-            _inputStream?.let {
-                _buffer = ByteArray(64)
-                _bufferSize = it.read(_buffer)
-            } ?: return@start
+            _buffer = ByteArray(64)
+            _bufferSize = _inputStream?.read(_buffer) ?: kotlin.run {
+                Log.e(TAG, "run: _inputStream is null")
+                return@start
+            }
             if (_bufferSize > 0) {
                 _bufferDataChain = SerialPortUtil.getCommByte(SerialPortUtil.bytesToHexString(_buffer!!, _bufferSize), "5a", 20)
                 _serialPortDataListener?.onGetData(_bufferDataChain)

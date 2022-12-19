@@ -112,7 +112,5 @@ class SerialPortKSearcher {
         override fun toString(): String {
             return "SerialPortKDriver(name='$name', _deviceRoot='$_deviceRoot', _devices=$_devices)"
         }
-
-
     }
 }

@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-//
-// Created by mozhimen on 2022/12/5.
-//
-#include <jni.h>
+
 #include <termios.h>
 #include <unistd.h>
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <cstring>
+#include <string.h>
+#include <jni.h>
+
+#include "SerialPort.h"
 
 #include "android/log.h"
 
-static const char *TAG = "SerialPortK>>>>>";
+static const char *TAG = "serial_port";
 #define LOGI(fmt, args...) __android_log_print(ANDROID_LOG_INFO,  TAG, fmt, ##args)
 #define LOGD(fmt, args...) __android_log_print(ANDROID_LOG_DEBUG, TAG, fmt, ##args)
 #define LOGE(fmt, args...) __android_log_print(ANDROID_LOG_ERROR, TAG, fmt, ##args)
@@ -100,12 +100,16 @@ static speed_t getBaudrate(jint baudrate) {
     }
 }
 
-extern "C"
-JNIEXPORT jobject JNICALL
-Java_com_mozhimen_serialportk_SerialPortK_00024Companion_open(JNIEnv *env, jobject thiz,
-                                                              jstring absolute_path, jint baudrate,
-                                                              jint data_bits, jint parity,
-                                                              jint stop_bits, jint flags) {
+/*
+ * Class:     android_serialport_SerialPort
+ * Method:    open
+ * Signature: (Ljava/lang/String;II)Ljava/io/FileDescriptor;
+ */
+JNIEXPORT jobject JNICALL Java_android_serialport_SerialPort_open
+        (JNIEnv *env, jobject thiz, jstring path, jint baudrate, jint dataBits, jint parity,
+         jint stopBits,
+         jint flags) {
+
     int fd;
     speed_t speed;
     jobject mFileDescriptor;
@@ -116,18 +120,18 @@ Java_com_mozhimen_serialportk_SerialPortK_00024Companion_open(JNIEnv *env, jobje
         if (speed == -1) {
             /* TODO: throw an exception */
             LOGE("Invalid baudrate");
-            return nullptr;
+            return NULL;
         }
     }
 
     /* Opening device */
     {
         jboolean iscopy;
-        const char *path_utf = env->GetStringUTFChars(absolute_path, &iscopy);
+        const char *path_utf = (*env)->GetStringUTFChars(env, path, &iscopy);
         LOGD("Opening serial port %s with flags 0x%x", path_utf, O_RDWR | flags);
         fd = open(path_utf, O_RDWR | flags);
         LOGD("open() fd = %d", fd);
-        env->ReleaseStringUTFChars(absolute_path, path_utf);
+        (*env)->ReleaseStringUTFChars(env, path, path_utf);
         if (fd == -1) {
             /* Throw an exception */
             LOGE("Cannot open port");
@@ -151,8 +155,9 @@ Java_com_mozhimen_serialportk_SerialPortK_00024Companion_open(JNIEnv *env, jobje
         cfsetispeed(&cfg, speed);
         cfsetospeed(&cfg, speed);
 
+
         cfg.c_cflag &= ~CSIZE;
-        switch (data_bits) {
+        switch (dataBits) {
             case 5:
                 cfg.c_cflag |= CS5;    //使用5位数据位
                 break;
@@ -188,7 +193,7 @@ Java_com_mozhimen_serialportk_SerialPortK_00024Companion_open(JNIEnv *env, jobje
                 break;
         }
 
-        switch (stop_bits) {
+        switch (stopBits) {
             case 1:
                 cfg.c_cflag &= ~CSTOPB;    //1位停止位
                 break;
@@ -210,28 +215,33 @@ Java_com_mozhimen_serialportk_SerialPortK_00024Companion_open(JNIEnv *env, jobje
 
     /* Create a corresponding file descriptor */
     {
-        jclass cFileDescriptor = env->FindClass("java/io/FileDescriptor");
-        jmethodID iFileDescriptor = env->GetMethodID(cFileDescriptor, "<init>", "()V");
-        jfieldID descriptorID = env->GetFieldID(cFileDescriptor, "descriptor", "I");
-        mFileDescriptor = env->NewObject(cFileDescriptor, iFileDescriptor);
-        env->SetIntField(mFileDescriptor, descriptorID, (jint) fd);
+        jclass cFileDescriptor = (*env)->FindClass(env, "java/io/FileDescriptor");
+        jmethodID iFileDescriptor = (*env)->GetMethodID(env, cFileDescriptor, "<init>", "()V");
+        jfieldID descriptorID = (*env)->GetFieldID(env, cFileDescriptor, "descriptor", "I");
+        mFileDescriptor = (*env)->NewObject(env, cFileDescriptor, iFileDescriptor);
+        (*env)->SetIntField(env, mFileDescriptor, descriptorID, (jint) fd);
     }
 
     return mFileDescriptor;
 }
 
-extern "C"
-JNIEXPORT void JNICALL
-Java_com_mozhimen_serialportk_SerialPortK_00024Companion_close(JNIEnv *env, jobject thiz) {
-    jclass SerialPortClass = env->GetObjectClass(thiz);
-    jclass FileDescriptorClass = env->FindClass("java/io/FileDescriptor");
+/*
+ * Class:     cedric_serial_SerialPort
+ * Method:    close
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL Java_android_serialport_SerialPort_close
+        (JNIEnv *env, jobject thiz) {
+    jclass SerialPortClass = (*env)->GetObjectClass(env, thiz);
+    jclass FileDescriptorClass = (*env)->FindClass(env, "java/io/FileDescriptor");
 
-    jfieldID mFdID = env->GetFieldID(SerialPortClass, "_fd", "Ljava/io/FileDescriptor;");
-    jfieldID descriptorID = env->GetFieldID(FileDescriptorClass, "descriptor", "I");
+    jfieldID mFdID = (*env)->GetFieldID(env, SerialPortClass, "mFd", "Ljava/io/FileDescriptor;");
+    jfieldID descriptorID = (*env)->GetFieldID(env, FileDescriptorClass, "descriptor", "I");
 
-    jobject mFd = env->GetObjectField(thiz, mFdID);
-    jint descriptor = env->GetIntField(mFd, descriptorID);
+    jobject mFd = (*env)->GetObjectField(env, thiz, mFdID);
+    jint descriptor = (*env)->GetIntField(env, mFd, descriptorID);
 
     LOGD("close(fd = %d)", descriptor);
     close(descriptor);
 }
+
