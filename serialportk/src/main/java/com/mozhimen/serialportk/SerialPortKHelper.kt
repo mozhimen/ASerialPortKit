@@ -60,7 +60,7 @@ class SerialPortKHelper {
         if (isInitSuccess()) {
             ReceiveThread().start() //开启线程监控是否有数据的收发
             Log.d(TAG, "open: success")
-        }else{
+        } else {
             Log.d(TAG, "open: fail")
         }
     }
@@ -106,12 +106,16 @@ class SerialPortKHelper {
             super.run()
             while (!_isThreadNeedInterrupt) {            //判断线程是否安全进行，更安全的结束线程
                 _buffer = ByteArray(64)
-                _bufferSize = _inputStream?.read(_buffer!!) ?: kotlin.run {
-                    Log.e(TAG, "run: _inputStream is null")
-                    return
-                }
-                if (_bufferSize > 0) {
-                    _dataReceiveListener?.onReceiveData(_buffer, _bufferSize)
+                try {
+                    _bufferSize = _inputStream?.read(_buffer!!) ?: kotlin.run {
+                        Log.e(TAG, "run: _inputStream is null")
+                        return
+                    }
+                    if (_bufferSize > 0) {
+                        _dataReceiveListener?.onReceiveData(_buffer, _bufferSize)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
                 sleep(100)
             }
