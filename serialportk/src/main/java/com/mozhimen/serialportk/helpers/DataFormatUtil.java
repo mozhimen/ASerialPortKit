@@ -89,8 +89,8 @@ public class DataFormatUtil {
                 | (ascii2int(data[3]) & 0x000F) << 4 | (ascii2int(data[4]) & 0x000F);
 
         if (data.length != length + 10) {
-            Log.i(TAG, "data.length" + data.length);
-            Log.i(TAG, "length" + length);
+            Log.d(TAG, "data.length" + data.length);
+            Log.d(TAG, "length" + length);
             return false;
         } // 长度校验
 
