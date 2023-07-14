@@ -28,7 +28,7 @@ class RS232DataHandler {
     fun addData(data: ByteArray) {
         if (data.isEmpty()) return
         add(data, data[0].toInt() == HEAD)
-        if (data[data.size - 1].toInt() == END && _cIndex > 0) {
+        if (_cIndex >= 28 && data[data.size - 1].toInt() == END && _cIndex > 0) {
             val result = ByteArray(_cIndex)
             System.arraycopy(_buffer, 0, result, 0, result.size)
             _cIndex = 0
