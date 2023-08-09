@@ -1,20 +1,28 @@
 plugins {
-    id 'com.android.application'
+    id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
-    id 'kotlin-kapt'
 }
 
 android {
     compileSdk rootProject.android.compileSdk
 
     defaultConfig {
-        applicationId "com.mozhimen.pidk_serialport_test"
         minSdk rootProject.android.minSdk
         targetSdk rootProject.android.targetSdk
-        versionCode rootProject.android.versionCode
-        versionName rootProject.android.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+//        ndkVersion "16.1.4479499"
+//        externalNativeBuild {
+//            cmake {
+//                cppFlags "-std=c++11"
+//            }
+//        }
+//        ndk {
+//            abiFilters "armeabi-v7a", "arm64-v8a", "x86"
+//            //指定支持的abi版本，也即是编译之后生成的so文件的类型
+//        }
     }
 
     buildTypes {
@@ -30,15 +38,20 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures {
-        dataBinding true
-    }
+//    externalNativeBuild {
+//        cmake {
+//            path 'CMakeLists.txt'
+//            version "3.18.1"
+//        }
+//    }
 }
 
 dependencies {
-    implementation project(':SwiftKit:basick')
-    implementation project(':pidk_serialport')
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+    implementation 'androidx.core:core-ktx:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
+    implementation 'com.google.android.material:material:1.7.0'
+    api project(project.path.replace(project.name, '') + ':pidk_serialport_base')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

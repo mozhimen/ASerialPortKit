@@ -9,11 +9,10 @@ dependencyResolutionManagement {
         google()
     }
 }
-rootProject.name = "SerialPortKit"
+rootProject.name = "PidKit_SerialPort"
 include ':app'
-include ':serialportk'
+include ':pidk_serialport'
 include ':SwiftKit'
-project(':SwiftKit').projectDir = new File("C:\\Users\\mozhimen\\Documents\\GitHub\\SwiftKit")
+project(':SwiftKit').projectDir = new File("C:\\Users\\${System.getenv().get("USERNAME")}\\Documents\\GitHub\\SwiftKit")
 include ':SwiftKit:basick'
-
-include ':serialport'
+include ':pidk_serialport_base'
