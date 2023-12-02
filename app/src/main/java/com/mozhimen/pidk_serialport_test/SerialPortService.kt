@@ -14,7 +14,7 @@ class SerialPortService : BaseLifecycleService2(), ISerialPortListener {
 
     private val _serialPortDataListener = object : ISerialPortDataListener {
         override fun onGetData(data: String) {
-            onCallback(data)
+            onGetData(data)
         }
     }
     private val _serialPortManager: SerialPortManager by lazy { SerialPortManager(this, _serialPortDataListener) }
