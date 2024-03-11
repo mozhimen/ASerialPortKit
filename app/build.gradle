@@ -5,11 +5,12 @@ plugins {
 }
 
 android {
+    namespace "com.mozhimen.pidk.serialport.test"
     compileSdk rootProject.android.compileSdk
 
     defaultConfig {
-        applicationId "com.mozhimen.pidk_serialport_test"
-        minSdk rootProject.android.minSdk
+        applicationId "com.mozhimen.pidk.serialport.test"
+        minSdk 21
         targetSdk rootProject.android.targetSdk
         versionCode rootProject.android.versionCode
         versionName rootProject.android.versionName
@@ -37,6 +38,7 @@ android {
 
 dependencies {
     implementation project(':SwiftKit:basick')
+    implementation project(':ABasicKit_Service:basick_service')
     implementation project(':pidk_serialport')
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
 

@@ -4,6 +4,7 @@ plugins {
 }
 
 android {
+    namespace "com.mozhimen.pidk.serialport"
     compileSdk rootProject.android.compileSdk
 
     defaultConfig {
@@ -48,10 +49,8 @@ android {
 
 dependencies {
 
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.5.1'
-    implementation 'com.google.android.material:material:1.7.0'
-    api project(project.path.replace(project.name, '') + ':pidk_serialport_base')
+    implementation project(':SwiftKit:basick')
+    api project(project.path.replace(project.name, '') + ':pidk_serialport_basic')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

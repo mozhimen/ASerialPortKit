@@ -8,7 +8,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.mozhimen.pidk_serialport_test.ServiceReceiveActivity">
+        tools:context="com.mozhimen.pidk.serialport.test.com.mozhimen.pidk.serialport.test.ServiceReceiveActivity">
 
         <TextView
             android:id="@+id/txt"
