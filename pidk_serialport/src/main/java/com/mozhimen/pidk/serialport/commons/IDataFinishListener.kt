@@ -10,4 +10,5 @@ package com.mozhimen.pidk.serialport.commons
  */
 interface IDataFinishListener {
     fun onFinish(data: ByteArray)
+    fun onEmpty()
 }
