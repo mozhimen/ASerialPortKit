@@ -13,7 +13,6 @@ import java.util.*
  * @ClassName SerialPortKSearcher
  * @Description TODO
  * @Author Mozhimen & Kolin Zhao
- * @Date 2022/12/7 16:01
  * @Version 1.0
  */
 class SerialPortKSearcher {

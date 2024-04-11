@@ -15,7 +15,6 @@ import java.io.InputStream
  * @ClassName SerialPortManager
  * @Description TODO
  * @Author Mozhimen & Kolin Zhao
- * @Date 2022/12/7 14:31
  * @Version 1.0
  */
 class SerialPortManager(owner: LifecycleOwner, listener: ISerialPortDataListener? = null) : ISerialPortListener, IUtilK {

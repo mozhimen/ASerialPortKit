@@ -7,7 +7,6 @@ import com.mozhimen.basick.service.bases.BaseLifecycleService2
  * @ClassName SerialPortService
  * @Description TODO
  * @Author Mozhimen & Kolin Zhao
- * @Date 2022/12/7 14:27
  * @Version 1.0
  */
 class SerialPortService : BaseLifecycleService2(), ISerialPortListener {

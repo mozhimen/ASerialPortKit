@@ -5,7 +5,6 @@ package com.mozhimen.pidk.serialport.test
  * @ClassName ISerialPortListener
  * @Description TODO
  * @Author Mozhimen & Kolin Zhao
- * @Date 2022/12/7 14:28
  * @Version 1.0
  */
 interface ISerialPortListener {
