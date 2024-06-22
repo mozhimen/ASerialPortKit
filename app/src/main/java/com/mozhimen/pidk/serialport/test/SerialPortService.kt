@@ -1,6 +1,6 @@
 package com.mozhimen.pidk.serialport.test
 
-import com.mozhimen.basick.service.bases.BaseLifecycleService2
+import com.mozhimen.servicek.bases.BaseLifecycleService2
 
 
 /**

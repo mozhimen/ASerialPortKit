@@ -5,15 +5,15 @@ import android.util.Log
 import com.mozhimen.basick.elemk.androidx.appcompat.bases.databinding.BaseActivityVDB
 import com.mozhimen.basick.lintk.optins.OApiCall_BindLifecycle
 import com.mozhimen.basick.lintk.optins.OApiInit_ByLazy
-import com.mozhimen.basick.service.ServiceProxy
-import com.mozhimen.basick.service.bases.BaseServiceResCallback
+import com.mozhimen.servicek.ServiceKProxy
+import com.mozhimen.servicek.bases.BaseServiceResCallback
 import com.mozhimen.pidk.serialport.SerialPortKSearcher
 import com.mozhimen.pidk.serialport.test.databinding.ActivityReceiveServiceBinding
 
 class ServiceReceiveActivity : BaseActivityVDB<ActivityReceiveServiceBinding>() {
 
     @OptIn(OApiCall_BindLifecycle::class, OApiInit_ByLazy::class)
-    private val _serviceProxy: ServiceProxy<ServiceReceiveActivity> by lazy { ServiceProxy(this, SerialPortService::class.java, _serialPortResListener) }
+    private val _serviceProxy: ServiceKProxy<ServiceReceiveActivity> by lazy { ServiceKProxy(this, SerialPortService::class.java, _serialPortResListener) }
 
     private val _serialPortFinder by lazy { SerialPortKSearcher() }
 
