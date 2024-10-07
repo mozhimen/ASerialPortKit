@@ -3,11 +3,11 @@ package com.mozhimen.pidk.serialport.test
 import android.serialport.SerialPort
 import android.util.Log
 import androidx.lifecycle.LifecycleOwner
-import com.mozhimen.basick.lintk.optins.OApiCall_BindLifecycle
-import com.mozhimen.basick.lintk.optins.OApiInit_ByLazy
+import com.mozhimen.kotlin.lintk.optins.OApiCall_BindLifecycle
+import com.mozhimen.kotlin.lintk.optins.OApiInit_ByLazy
 import com.mozhimen.basick.taskk.temps.TaskKPollInfinite
-import com.mozhimen.basick.utilk.commons.IUtilK
-import com.mozhimen.basick.utilk.kotlin.bytes2strHex
+import com.mozhimen.kotlin.utilk.commons.IUtilK
+import com.mozhimen.kotlin.utilk.kotlin.bytes2strHex
 import java.io.InputStream
 
 

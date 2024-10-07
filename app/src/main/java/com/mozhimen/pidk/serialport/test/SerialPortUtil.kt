@@ -1,7 +1,7 @@
 package com.mozhimen.pidk.serialport.test
 
-import com.mozhimen.basick.utilk.kotlin.UtilKString
-import com.mozhimen.basick.utilk.kotlin.findFirst
+import com.mozhimen.kotlin.utilk.kotlin.UtilKString
+import com.mozhimen.kotlin.utilk.kotlin.findFirst
 import kotlin.math.pow
 
 fun String.getStrBytesFor(startStr: String, length: Int): String =

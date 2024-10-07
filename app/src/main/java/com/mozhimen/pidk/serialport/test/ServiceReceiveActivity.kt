@@ -2,9 +2,9 @@ package com.mozhimen.pidk.serialport.test
 
 import android.os.Bundle
 import android.util.Log
-import com.mozhimen.basick.elemk.androidx.appcompat.bases.databinding.BaseActivityVDB
-import com.mozhimen.basick.lintk.optins.OApiCall_BindLifecycle
-import com.mozhimen.basick.lintk.optins.OApiInit_ByLazy
+import com.mozhimen.kotlin.elemk.androidx.appcompat.bases.databinding.BaseActivityVDB
+import com.mozhimen.kotlin.lintk.optins.OApiCall_BindLifecycle
+import com.mozhimen.kotlin.lintk.optins.OApiInit_ByLazy
 import com.mozhimen.servicek.ServiceKProxy
 import com.mozhimen.servicek.bases.BaseServiceResCallback
 import com.mozhimen.pidk.serialport.SerialPortKSearcher
