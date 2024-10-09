@@ -2,7 +2,7 @@ package com.mozhimen.pidk.serialport.test
 
 import android.os.Bundle
 import android.util.Log
-import com.mozhimen.kotlin.elemk.androidx.appcompat.bases.databinding.BaseActivityVDB
+import com.mozhimen.bindk.bases.viewdatabinding.activity.BaseActivityVDB
 import com.mozhimen.kotlin.utilk.kotlin.bytes2str
 import com.mozhimen.pidk.serialport.SerialPortKHelper
 import com.mozhimen.pidk.serialport.commons.IDataReceiveListener

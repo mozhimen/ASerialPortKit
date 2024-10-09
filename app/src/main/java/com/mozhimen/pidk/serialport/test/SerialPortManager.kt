@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.LifecycleOwner
 import com.mozhimen.kotlin.lintk.optins.OApiCall_BindLifecycle
 import com.mozhimen.kotlin.lintk.optins.OApiInit_ByLazy
-import com.mozhimen.basick.taskk.temps.TaskKPollInfinite
+import com.mozhimen.taskk.temps.TaskKPollInfinite
 import com.mozhimen.kotlin.utilk.commons.IUtilK
 import com.mozhimen.kotlin.utilk.kotlin.bytes2strHex
 import java.io.InputStream
