@@ -37,10 +37,9 @@ android {
 }
 
 dependencies {
-    implementation project(':SwiftKit:basick')
-    implementation project(':ABasicKit_Service:basick_service')
-    implementation project(':pidk_serialport')
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation project(':ASwiftKit:basick')
+    implementation project(':ASwiftKit:servicek')
+    implementation project(':serialportk')
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'

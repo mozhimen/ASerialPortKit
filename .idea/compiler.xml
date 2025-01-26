@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="17" />
+    <bytecodeTargetLevel target="1.8">
+      <module name="APidKit_SerialPort.ALibKit_Google.material" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetbrains.kotlin_stdlib" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetbrains.kotlinx_coroutines" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetpack.annotation" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetpack.core" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetpack.core_splashscreen" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetpack.databinding" target="17" />
+      <module name="APidKit_SerialPort.ALibKit_Jetpack.preference" target="17" />
+      <module name="APidKit_SerialPort.app" target="17" />
+      <module name="APidKit_SerialPort.ASwiftKit.basick" target="17" />
+      <module name="APidKit_SerialPort.ASwiftKit.servicek" target="17" />
+      <module name="APidKit_SerialPort.basic" target="17" />
+      <module name="APidKit_SerialPort.serialportk" target="17" />
+    </bytecodeTargetLevel>
   </component>
 </project>
